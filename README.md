@@ -3,3 +3,5 @@
 ### 解决方案：只能通过on事件去绑定click事件
 ***
 ### 2. outerHTML会返回包括自身在内的所有节点
+***
+### 3. html标签里面的role属性是语意增强的意思，比如<div role='button'>button</div> 意思是这个div现在作为一个按钮button 辅助识别工具就会自动识别为button

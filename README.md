@@ -8,3 +8,4 @@
 ***
 ### 4. 拼接字符串路面不能再传对象，否则接受到的参数打印出来会是'[object,object]'
 ***
+### 5. xmpp登录流程[这里](https://www.jianshu.com/p/2b0de683cce9)

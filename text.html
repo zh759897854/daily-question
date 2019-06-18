@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>如何隐藏鼠标放在A标签上时浏览器左下角显示的跳转界面地址</title>
+<body>
+<div class="box" onclick="getDom()">点我</div>
+ 
+</body>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    function getDom() {
+        var arry = ['1','2','3','4','5'];
+        for(var i = 0; i < arry.length; i++) {
+            var sLink = $('<a>'+ arry[i] +'</a>');
+            sLink.on({
+                click: function() {
+                    console.log()
+                }
+            })
+        }
+    }
+
+    var onject = {
+        name: 'zh',
+        age: '18',
+        sex: 'man'
+    }
+    console.log(onject['name'],'@@@')
+
+    window.RouteTo = function(a,b,c) {
+        window.location.href = a;
+    }
+</script>
+</html>

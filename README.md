@@ -86,3 +86,4 @@ foo.apply(obj);//输出obj
                                 )
                         }
                 }
+***

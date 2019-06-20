@@ -27,3 +27,5 @@ function foo(){
 }
 foo.call(obj);//输出obj
 foo.apply(obj);//输出obj
+***
+### 9. \<meta name="renderer" content="webkit|ie-comp|ie-stand">强行设置360浏览器为急速模式

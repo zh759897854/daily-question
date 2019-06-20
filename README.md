@@ -29,3 +29,5 @@ foo.call(obj);//输出obj
 foo.apply(obj);//输出obj
 ***
 ### 9. \<meta name="renderer" content="webkit|ie-comp|ie-stand">强行设置360浏览器为急速模式
+***
+### 10. vue项目中引用文件 @ 的作用是在你引入模块时，可以使用 @ 代替 /src 目录，避免书写麻烦又易错的相对路径。

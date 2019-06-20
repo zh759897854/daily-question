@@ -31,3 +31,58 @@ foo.apply(obj);//输出obj
 ### 9. \<meta name="renderer" content="webkit|ie-comp|ie-stand">强行设置360浏览器为急速模式
 ***
 ### 10. vue项目中引用文件 @ 的作用是在你引入模块时，可以使用 @ 代替 /src 目录，避免书写麻烦又易错的相对路径。
+***
+### 11. vue使用from提交形式上传文件的时候只能用get，而且需要在上传参数里面添加属性
+                let config = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                };
+                Axios.post(that.uploadSingleURL, params, config).then(function (res) {} })
+***
+### 12. axios取消请求 
+                import request from '../utils/request'  // 配置过的Axios 对象
+                import axios from 'axios' 
+
+                export function getLatenessDetailSize(params, that) { 
+                    return request({
+                        url: '/api/v1/behaviour/latenessDetailSize', 
+                        method: 'post',
+                        params: params,
+                        cancelToken: new axios.CancelToken(function executor(c) { // 设置 cancel token
+                            that.source = c;
+                        })
+                    })
+                }
+                #### 具体业务逻辑中
+                import { getLatenessDetail } from "../api";
+                export default {
+                        data() {
+                            return {
+                                tableData: [],
+                                total: 0,
+                                page: 1,
+                                loadTable: false,
+                                params: { },
+                                source: null
+                            }
+                        },
+                        methods: {
+                            cancelQuest() {
+                                if (typeof this.source === 'function') {
+                                    this.source('终止请求'); //取消请求
+                                }
+                            },
+                            getTableData(val) {
+                                this.cancelQuest() // 请求发送前调用
+                                this.page = val
+                                this.loadTable = true
+                                getLatenessDetail(this.params, (val - 1) * 10, this)
+                                    .then(
+                                        res => {
+                                            this.loadTable = false
+                                            this.tableData = res.data
+                                        }
+                                )
+                        }
+                }

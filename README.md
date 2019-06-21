@@ -87,3 +87,4 @@ foo.apply(obj);//输出obj
                         }
                 }
 ***
+### 13. vue项目中，require文件到main.js后，在组件引入时还需要去import，无需再实例化

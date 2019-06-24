@@ -88,3 +88,5 @@ foo.apply(obj);//输出obj
                 }
 ***
 ### 13. vue项目中，require文件到main.js后，在组件引入时还需要去import，无需再实例化
+***
+### 14.vue引入后为什么有的需要use有的不需要？比如axios可以直接使用 不需要vue.sue 那是因为在插件封装时有的插件没有install这一步。 转载至[vue.use源码解读](https://segmentfault.com/a/1190000012296163)

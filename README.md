@@ -92,3 +92,5 @@ foo.apply(obj);//输出obj
 ### 14.vue引入后为什么有的需要use有的不需要？比如axios可以直接使用 不需要vue.sue 那是因为在插件封装时有的插件没有install这一步。 转载至[vue.use源码解读](https://segmentfault.com/a/1190000012296163)
 ***
 ### 15. vue数组变异，导致页面数据不更新
+***
+### 16. @key.enter.native

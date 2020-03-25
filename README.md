@@ -98,4 +98,6 @@ foo.apply(obj);//输出obj
 ### 17. 使用route跳转本页时页面是不会刷新的，需要请求数据时需要watch route变化然后去请求数据达到刷新效果
 ***
 ### 18. vue中加载图片失败显示默认图片 <img :src="logoSrc"  @error="defaultImgs()"> 亲测有效
+
+### 19.new RegExp(curCookie.key.toString(),'g') 当里面包含特殊字符会报错 
 ***

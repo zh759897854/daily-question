@@ -99,5 +99,6 @@ foo.apply(obj);//输出obj
 ***
 ### 18. vue中加载图片失败显示默认图片 <img :src="logoSrc"  @error="defaultImgs()"> 亲测有效
 
-### 19.new RegExp(curCookie.key.toString(),'g') 当里面包含特殊字符会报错 
+### 19.new RegExp(curCookie.key.toString(),'g') 当里面包含特殊字符会报错
+### 20.$.parents('ele') 获取到的知识dom 需要转为jq对象
 ***

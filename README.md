@@ -101,4 +101,5 @@ foo.apply(obj);//输出obj
 
 ### 19.new RegExp(curCookie.key.toString(),'g') 当里面包含特殊字符会报错
 ### 20.$.parents('ele') 获取到的知识dom 需要转为jq对象
+### 21.replace(x , string)
 ***

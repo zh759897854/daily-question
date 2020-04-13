@@ -36,4 +36,28 @@
         window.location.href = a;
     }
 </script>
+<script>
+        var data = {"data_list":[{"agentTypeName":"主要往来银行","agentName":"CIMB Bank Berhad"},{"agentTypeName":"香港股份过户登记分处","agentName":"香港中央证券登记有限公司"},{"agentTypeName":"收款银行","agentName":"星展银行（香港）有限公司"},{"agentTypeName":"合规顾问","agentName":"中毅资本有限公司"},{"agentTypeName":"行业顾问","agentName":"灼识行业谘询有限公司"},{"agentTypeName":"核数师","agentName":"Ernst & Young PLT"},{"agentTypeName":"申报会计师","agentName":"安永会计师事务所"},{"agentTypeName":"包销商香港法律顾问","agentName":"何耀棣律师事务所"},{"agentTypeName":"独家保荐人香港法律顾问","agentName":"何耀棣律师事务所"},{"agentTypeName":"开曼群岛法律顾问","agentName":"毅柏律师事务所"},{"agentTypeName":"马来西亚法律顾问","agentName":"David Lai & Tan"},{"agentTypeName":"香港法律顾问","agentName":"陈浩铭律师事务所与泰乐信联盟"},{"agentTypeName":"公开发售包销商","agentName":"中毅资本有限公司"},{"agentTypeName":"联席牵头经办人","agentName":"中毅资本有限公司"},{"agentTypeName":"联席账簿管理人","agentName":"中毅资本有限公司"},{"agentTypeName":"公开发售包销商","agentName":"晋立峰证券有限公司"},{"agentTypeName":"联席牵头经办人","agentName":"晋立峰证券有限公司"},{"agentTypeName":"联席账簿管理人","agentName":"晋立峰证券有限公司"},{"agentTypeName":"公开发售包销商","agentName":"联合证券有限公司"},{"agentTypeName":"联席牵头经办人","agentName":"联合证券有限公司"},{"agentTypeName":"联席账簿管理人","agentName":"联合证券有限公司"},{"agentTypeName":"公开发售包销商","agentName":"京基证券集团有限公司"},{"agentTypeName":"联席牵头经办人","agentName":"京基证券集团有限公司"},{"agentTypeName":"联席账簿管理人","agentName":"京基证券集团有限公司"},{"agentTypeName":"公开发售包销商","agentName":"瑞邦证券有限公司"},{"agentTypeName":"联席牵头经办人","agentName":"瑞邦证券有限公司"},{"agentTypeName":"联席账簿管理人","agentName":"瑞邦证券有限公司"},{"agentTypeName":"公开发售包销商","agentName":"川文证券有限公司"},{"agentTypeName":"联席牵头经办人","agentName":"川文证券有限公司"},{"agentTypeName":"联席账簿管理人","agentName":"川文证券有限公司"},{"agentTypeName":"独家保荐人","agentName":"中毅资本有限公司"}]}
+        for(var key in data.data_list) {
+            var item = data.data_list[key];
+            item.agentType = '1'
+            if(key > 10) {
+                item.agentType = '2'
+            }else if(key > 15) {
+                item.agentType = '3'
+            }
+        }
+        console.log(data)
+        
+        var tempData = {};
+        for(var k = 1; k < 28; k++) {
+            tempData['type' + k] = [];
+            for(var x in data.data_list) {
+                var cell = data.data_list[x];
+                if(cell.agentType === ''+k) {
+                    tempData['type' + k].push(cell)
+                }
+            }
+        }
+    </script>
 </html>

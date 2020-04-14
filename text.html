@@ -59,5 +59,34 @@
                 }
             }
         }
+    
+    
+    function setAgencyDatasDetails(data) {
+        var templateStr = '';
+        if(data) {
+            templateStr += '<div class="agencyItem"><table table-layout: fixed !important;><tr>';
+            var count = 1;
+            for(var ii in data) {
+                var agencyCompany = data[ii].split(',');
+                if(count%2) {
+                    templateStr += '<td colspan="1">'+ ii +'</td><td colspan="1">';
+                    for(var iii = 0; iii < agencyCompany.length; iii++) {
+                        templateStr += '<a role="link">'+ agencyCompany[iii] +'</a></br>'
+                    }
+                    templateStr += '</td>'
+                }else {
+                    templateStr += '<td colspan="1">'+ ii +'</td><td colspan="1">';
+                    for(var iiii = 0; iiii < agencyCompany.length; iiii++) {
+                        templateStr += '<a role="link">'+ agencyCompany[iiii] +'</a></br>'
+                    }
+                    templateStr += '</td></tr><tr>'
+                }
+                count++;
+            }
+            templateStr += '</tr><tr id="model-tr"><td colspan="1"></td><td colspan="1">' +
+                '</td><td colspan="1"></td><td colspan="1"></td></tr></table></div>';
+        }
+        return $(templateStr)
+    }
     </script>
 </html>

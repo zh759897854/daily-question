@@ -1,0 +1,259 @@
+/**
+ * Created by json on 2018/8/24.
+ */
+import axios from "axios";
+import inters from "../config/inters.config";
+import UTILS from "../utils/index";
+import getSign from "./sign.service";
+import Log from "./log.service";
+import Route from "./route.service";
+
+axios.defaults.withCredentials = true; //让ajax携带cookie
+
+const DEFAULT = {
+  proxy: true, //是否需要通过代理请求数据
+  method: "post", //method
+  url: "", //url
+  data: {}, //参数
+  success: function () {
+  }, // 成功的回调函数
+  error: function () {
+  }, // 错误的回调函数
+  always: function () {
+  } //完成的回调函数
+};
+
+const DEFAULTDATA = inters.globalData;
+
+/**
+ * 拼接请求参数字符串
+ * @param data
+ */
+const getParamsStr = data => {
+  let result = [];
+  for (let i in data) {
+    if (Object.hasOwnProperty.call(data, i)) {
+      result.push(i + "=" + data[i]);
+    }
+  }
+  return result.join("&");
+};
+
+class DataService {
+  configSource = {}; //存储起来的传入的请求配置
+  config = {}; //配置
+  loading = false; //请求状态标识
+  cancel = null; //请求取消标识
+  curAxios = null; //当前请求的axios对象
+  timer = null; //防抖计时器
+  debounceTimerLength = 300; //请求防抖时间时长
+  timeoutLength = 90000; //超时时间，单位为ms
+
+  successCallback = function () {
+  };
+  errorCallback = function () {
+  };
+  completeCallback = function () {
+  };
+
+  constructor(config) {
+    let that = this;
+    //创建当前请求所用的axios对象
+    that.curAxios = axios.create({
+      timeout: that.timeoutLength
+    });
+
+    //初始化请求配置
+    that.updateConfig(config);
+
+    // 添加请求拦截器
+    this.curAxios.interceptors.request.use(
+        function (config) {
+          // 在发送请求之前做些什么
+          return config;
+        },
+        function (error) {
+          that.loading = false;
+          // 对请求错误做些什么
+          return Promise.reject(error);
+        }
+    );
+
+    // 添加响应拦截器
+    this.curAxios.interceptors.response.use(
+        function (response) {
+          that.loading = false;
+          // 对响应数据做点什么
+          let data = response.data || {};
+          let msg = data.msg || {};
+          switch (msg.code.toString()) {
+            case '10006':
+              Route.routeTo('login');
+              break;
+            default:
+              break;
+          }
+          return data;
+        },
+        function (error) {
+          that.loading = false;
+          // 对响应错误做点什么
+          if (error && error.response && error.response.status === 808) {
+            console.error("加密串错误");
+          }
+          Log.error(error);
+          return Promise.reject(error);
+        }
+    );
+  }
+
+  updateConfig(cfg) {
+    this.configSource = Object.assign({}, this.configSource, cfg);
+    let tempConfig = Object.assign({}, DEFAULT, this.configSource);
+    this.config = {};
+    this.config["method"] = tempConfig["method"];
+
+    //重置请求防抖间隔时长
+    if (tempConfig.debounceTimerLength !== undefined) {
+      this.debounceTimerLength = tempConfig.debounceTimerLength;
+    }
+    //初始化请求成功回调函数
+    if (tempConfig.success) {
+      this.successCallback = tempConfig.success;
+    }
+    //初始化请求失败回调函数
+    if (tempConfig.error) {
+      this.errorCallback = tempConfig.error;
+    }
+    //初始化请求不管成功与否一定会执行的函数
+    if (tempConfig.complete) {
+      this.completeCallback = tempConfig.complete;
+    }
+    if (tempConfig.proxy === true) {
+      //通过代理请求数据接口数据
+      //给 data 添加请求默认参数
+      let tempData = Object.assign({}, DEFAULTDATA, tempConfig.data);
+      //添加时间戳
+      tempData["timestamp"] = new Date().getTime();
+      //添加sign值
+      tempData = getSign(tempData);
+      //提取请求数据接口的URL
+      let dataUrl = tempConfig.url,
+          //序列化请求的参数
+          dataParams = getParamsStr(tempData);
+      //重整请求参数
+      this.config.data = Object.assign({}, DEFAULTDATA, {
+        url: dataUrl,
+        params: dataParams
+      });
+      //拼接请求数据接口的代理接口的URL
+      this.config["url"] = inters.baseUrl + inters.inters.proxy;
+    } else {
+      //直接请求代理上的接口返回的数据
+      //拼接请求接口的完整的URL
+      this.config["url"] = inters.baseUrl + tempConfig.url;
+      //添加请求接口所需的默认参数
+      this.config.data = Object.assign({}, DEFAULTDATA, tempConfig.data);
+    }
+    //添加时间戳
+    this.config.data["timestamp"] = new Date().getTime();
+    this.config.responseType = tempConfig["responseType"] || "json";
+    //计算sign值, falseButSign代表代理上的接口，但使用默认key签名
+    if (tempConfig.proxy === "falseButSign" || tempConfig.proxy === true) {
+      this.config.data = getSign(this.config.data);
+    } else {
+      this.config.data = getSign(
+          this.config.data,
+          "893AB78C64436469ABC3439974902DCC"
+      );
+    }
+    //序列化参数
+    this.config.data = UTILS.serializeData(this.config.data);
+
+    this._updateCancelToken();
+  }
+
+  _updateCancelToken() {
+    let that = this;
+
+    let CancelToken = axios.CancelToken;
+    that.config.cancelToken = new CancelToken(function executor(c) {
+      // executor 函数接收一个 cancel 函数作为参数
+      that.cancel = c;
+    });
+  }
+
+  getRequest() {
+    let that = this;
+    //更新请求状态标识
+    that.loading = true;
+    //初始化可取消请求控制器
+    that.cancel = null;
+    //保存当前请求
+    return that.curAxios.request(this.config);
+  }
+
+  /**
+   * 直接发起请求
+   */
+  request() {
+    let that = this;
+    //更新请求状态标识
+    that.loading = true;
+    //初始化可取消请求控制器
+    that.cancel = null;
+    //保存当前请求
+    that.curAxios
+        .request(that.config)
+        .then(function (data) {
+          that.successCallback(data);
+        })
+        .catch(function () {
+          that.errorCallback(arguments);
+        })
+        .finally(function () {
+          that.completeCallback(arguments);
+        });
+  }
+
+  /**
+   * 发起防抖请求
+   */
+  debounceRequest() {
+    let that = this;
+    if (that.timer !== null) {
+      window.clearTimeout(that.timer);
+      that.timer = null;
+    }
+    that.timer = window.setTimeout(function () {
+      //更新请求状态标识
+      that.loading = true;
+      //初始化可取消请求控制器
+      that.cancel = null;
+      //开始请求
+      that.updateConfig();
+      that.curAxios
+          .request(that.config)
+          .then(function (data) {
+            that.successCallback(data);
+          })
+          .catch(function () {
+            that.errorCallback(arguments);
+          })
+          .finally(function () {
+            that.completeCallback(arguments);
+          });
+    }, that.debounceTimerLength);
+  }
+
+  cancelRequest() {
+    if (this.timer) {
+      window.clearTimeout(this.timer);
+    }
+    if (this.cancel) {
+      this.cancel();
+    }
+  }
+}
+
+export default DataService;

@@ -88,5 +88,31 @@
         }
         return $(templateStr)
     }
+    
+    for(var key in data) {
+                templateStr += '<ul class="first-wrapper"><li class="first-type">'+ titleData[key] +'</li><li class="second-type">';
+                for(var i in data[key]) {
+                    templateStr += '<ul class="second-wrapper"><li class="type-first">'+ [i] +'</li><li class="type-second">';
+                    var tempArray = data[key][i].split(',');
+                    var len = tempArray.length,
+                        more = false;
+                    if(len > 8) {
+                        more = true;
+                        len = 8;
+                    }
+                    for(var ii = 0; ii < len; ii++) {
+                        if(determineStringIsCompany(tempArray[ii]) === '1') {
+                            templateStr += '<div title="'+ tempArray[ii] +'"><a class="toCompanyDetail" role="link">'+ tempArray[ii] +'</a></div>'
+                        }else {
+                            templateStr += '<div title="'+ tempArray[ii] +'">'+ tempArray[ii] +'</div>'
+                        }
+                    }
+                    if(more) {
+                        templateStr += '<div><a class="detail" data-type="'+ i +'" data-name="'+ data[key][i] +'" role="link">...更多</a></div>'
+                    }
+                    templateStr += '</li></ul>'
+                }
+                templateStr += '</li></ul>'
+            }
     </script>
 </html>

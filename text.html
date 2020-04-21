@@ -114,5 +114,20 @@
                 }
                 templateStr += '</li></ul>'
             }
+
+    <input :class="iptClassName"
+           :type="type"
+           :name="name"
+           @input="doInput"
+           :placeholder="placeholder"
+           :readonly="readOnly"
+           :maxlength="maxLength"
+           @blur="onBlurEvent"
+           @focus="onFocusEvent"
+           @keyup="iptKeyupEvent"
+           @click="iptClickEvent"
+           v-model.trim="searchContent"
+           @keyup.enter="searchByInput"/>
+    
     </script>
 </html>

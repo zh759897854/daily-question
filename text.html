@@ -115,5 +115,23 @@
                 templateStr += '</li></ul>'
             }
     
+/**
+ * 判断字符串中是否包含中文字符
+ * @param str
+ * @returns {boolean}
+ */
+function hasChineseChar(str) {
+    str = str.toString();
+    var reg = /^[^\u4e00-\u9fa5]+$/,
+        result = false;
+    if(str) {
+        // 正则匹配存在中文false 不存在true
+        if(!reg.test(str)) {
+            result = true
+        }
+    }
+    return result
+}
+    
     </script>
 </html>

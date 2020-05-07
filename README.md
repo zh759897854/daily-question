@@ -104,4 +104,5 @@ foo.apply(obj);//输出obj
 ### 21.replace(x , string)
 ### 22.数组插入特定位置数据可以用 splice(index, 0, 'xxx')
 ### 23.将this.CliEngine = require(this.basicPath + "lib/cli-engine"); 更改为 this.CliEngine = require(this.basicPath + "lib/cli-engine").CLIEngine;
+### 24.webstrom 激活码
 ***

@@ -106,4 +106,5 @@ foo.apply(obj);//输出obj
 ### 23.将this.CliEngine = require(this.basicPath + "lib/cli-engine"); 更改为 this.CliEngine = require(this.basicPath + "lib/cli-engine").CLIEngine;
 ### 24.webstrom 激活码
 ### 25.netstat -aon|findstr "8080"， 找到占用端口号的PID 查询完基本就是node taskkill /f /t /im node.exe 直接杀死
+### 26.computed 属性被mounted的setAttrbulite('style')覆盖  解决方式是全部在mounted 里面设置
 ***

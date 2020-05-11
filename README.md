@@ -107,4 +107,5 @@ foo.apply(obj);//输出obj
 ### 24.webstrom 激活码
 ### 25.netstat -aon|findstr "8080"， 找到占用端口号的PID 查询完基本就是node taskkill /f /t /im node.exe 直接杀死
 ### 26.computed 属性被mounted的setAttrbulite('style')覆盖  解决方式是全部在mounted 里面设置
+### 27.当vue的watch监听一组对象，对象某个属性值发生变化但是并未触发watch的检测，这时候需要添加deep: true 属性进行深度监听
 ***

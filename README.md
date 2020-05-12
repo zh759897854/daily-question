@@ -128,5 +128,5 @@ foo.apply(obj);//输出obj
     var dom=document.createTextNode('hello world');
 
 ***
-#### window.open 跳转时带有本地前缀， 补全地址 http:// https：//
+#### 30.window.open 跳转时带有本地前缀， 补全地址 http:// https：//
 

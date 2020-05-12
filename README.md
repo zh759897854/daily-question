@@ -108,5 +108,24 @@ foo.apply(obj);//输出obj
 ### 25.netstat -aon|findstr "8080"， 找到占用端口号的PID 查询完基本就是node taskkill /f /t /im node.exe 直接杀死
 ### 26.computed 属性被mounted的setAttrbulite('style')覆盖  解决方式是全部在mounted 里面设置
 ### 27.当vue的watch监听一组对象，对象某个属性值发生变化但是并未触发watch的检测，这时候需要添加deep: true 属性进行深度监听
+### 29
 ### 28.git拉取远程分支更新失败 git branch --set-upstream-to origin/master
+### 29.问题：Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'
+
+```原因：appendChild的参数为node节点，导致这样的问题说明当前的参数不是node，有可能是字符串。
+
+这时dom是字符串
+
+解决方法：
+var dom=document.createElement('p');
+dom.className='book';
+dom.innerHTML='hello world';
+document.body.appendChild(dom);
+此时dom为node。
+
+如果添加的元素是字符串，使用document.createTextNode()创建节点。
+
+var dom=document.createTextNode('hello world');```
+
+
 ***

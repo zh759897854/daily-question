@@ -112,7 +112,7 @@ foo.apply(obj);//输出obj
 ### 28.git拉取远程分支更新失败 git branch --set-upstream-to origin/master
 ### 29.问题：Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'
 
-   ``` 原因：appendChild的参数为node节点，导致这样的问题说明当前的参数不是node，有可能是字符串。
+    原因：appendChild的参数为node节点，导致这样的问题说明当前的参数不是node，有可能是字符串。
 
     这时dom是字符串
 
@@ -125,8 +125,8 @@ foo.apply(obj);//输出obj
 
     如果添加的元素是字符串，使用document.createTextNode()创建节点。
 
-    var dom=document.createTextNode('hello world');```
-    
-    ***
-    #### window.open 跳转时带有本地前缀， 补全地址 http:// https：//
+    var dom=document.createTextNode('hello world');
+
+***
+#### window.open 跳转时带有本地前缀， 补全地址 http:// https：//
 

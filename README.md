@@ -128,5 +128,33 @@ foo.apply(obj);//输出obj
     var dom=document.createTextNode('hello world');
 
 ***
-#### 30.window.open 跳转时带有本地前缀， 补全地址 http:// https：//
+### 30.window.open 跳转时带有本地前缀， 补全地址 http:// https：//
+### 31. 数组获得重复数据
+        function GetRepeatFwxmmc(ary1){
+        var ary = ary1.sort(function(a,b) {
+            return a - b
+        });//数组排序
+        var cffwxmsAry = new Array();
+        //所有重复元素添加进新数组内
+        for(var i=0;i<ary.length;i++){
+            if (ary[i]==ary[i+1]){
+                cffwxmsAry.push(ary[i]);
+            }
+        }
+        var result = [], isRepeated;
+
+        //对重复元素数组进行元素去重
+        for (var k = 0; k < cffwxmsAry.length; k++) {
+            isRepeated = false;
+            for (var j = 0;j < result.length; j++) {
+                if (cffwxmsAry[k] == result[j]) {
+                    isRepeated = true; break;
+                }
+            }
+            if (!isRepeated) {
+                result.push(cffwxmsAry[k]);
+            }
+        }
+        return result;
+    }
 

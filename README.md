@@ -159,3 +159,4 @@ foo.apply(obj);//输出obj
     }
     
 ### 32. uni.createSelectorQuery().select('#board')
+### 33.

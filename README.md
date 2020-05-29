@@ -159,3 +159,4 @@ foo.apply(obj);//输出obj
     }
     
 ### 32. uni.createSelectorQuery().select('#board')
+### 33. uniapp 组件接收属性必须是严格模式  否则属性设置会失效

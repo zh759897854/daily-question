@@ -162,3 +162,15 @@ foo.apply(obj);//输出obj
 ### 33. uniapp 组件接收属性必须是严格模式  否则属性设置会失效  
 ### 34. uniApp 组件多次传参导致对象里的方法丢失 父子组件通信去调用   
 ### 35. [zrender](https://ecomfe.github.io/zrender-doc/public/api.html#zrendergroupsilent)
+### 36.getCanvasImg() {
+                let canvas = document.querySelector("#zrender-canvas canvas");
+                if (canvas) {
+                    let strDataURI = canvas.toDataURL("image/jpeg");
+                    let a = document.createElement("a");
+                    a.download = 'canvasImg';　　//下载的文件名，
+                    a.href =strDataURI;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                }
+            } canvas 保存为图片

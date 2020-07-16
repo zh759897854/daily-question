@@ -176,4 +176,3 @@ foo.apply(obj);//输出obj
             } canvas 保存为图片
 ### 37. uniapp 弹窗在ios平台穿透导致body滑动， 直接替换为view-scroll 然后添加阻止默认事件就可以了
 ### 38. vue对象检测属性值变了但是view没刷新 证明添加的属性没有set get 属性 用this.$set(obj, key, value) 的形式就可以了
-### 39. 

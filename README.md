@@ -179,3 +179,4 @@ foo.apply(obj);//输出obj
 ### 39. 动态生成的dom元素插入到页面，用on绑定事件会出现点击一次绑定一次  这样累加就会出现点击触发多次的 必须先用off解绑事件  
 ### 40. directive 和路由卫士配合可以实现权限控制系统 并将邓丽信息存入本地存储localstroage里面配合指令达到权限控制目的
 ### 41. vue 下d3引用 import * as d3 from 'd3' d3.slect('rect')
+### 42.GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456'; 开启mysql的权限，否则只能localhost登录

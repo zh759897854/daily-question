@@ -182,3 +182,4 @@ foo.apply(obj);//输出obj
 ### 42.GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456'; 开启mysql的权限，否则只能localhost登录
 ### 43.node搭建前端服务器之后，上传功能无法上传到具体位置
 ### 44. npm run serve报错  core-js/modules/es6.array.fill in 是因为core版本太高了  需要降版本cnpm install core-js@2
+### 45.webstrom eslint修复文件命令： npm run lint -- fix

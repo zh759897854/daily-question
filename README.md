@@ -183,3 +183,4 @@ foo.apply(obj);//输出obj
 ### 43.node搭建前端服务器之后，上传功能无法上传到具体位置
 ### 44. npm run serve报错  core-js/modules/es6.array.fill in 是因为core版本太高了  需要降版本cnpm install core-js@2
 ### 45.webstrom eslint修复文件命令： npm run lint -- fix
+### 46.vue3.0 数据驱动基于porxy， 每一个变量的多有属性添加了监听属性，以实现数据驱动  vue2.0是基于defineProperty监听，但是它只能监听单一属性，依靠setter和getter去实现数据驱动，也就是数据劫持+订阅发布模式
